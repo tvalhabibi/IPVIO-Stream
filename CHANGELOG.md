@@ -2,6 +2,7 @@
 
 ## Unreleased
 - Focus frame: the highlighted channel row, the Live TV start cards, the "Continue watching" cards and the category tiles are no longer cut off at the edge of their list. The lists clip their content and had less room than the enlargement and shadow of the highlighted item need; the channel row also grew only to the right. Padding at the sides and above and below was increased by a few dp, and the channel row now grows around its middle. Not built, not tested on a device (T-026)
+- Fix: more highlighted items looked cut off at the list edge: the movie/series grid, the categories preview grid, the episode and season lists, cast and similar-title rows and the sport match rows. Padding was increased by a few dp and the episode row now grows around its middle. Not built, not tested on a device (T-027)
 
 ## 1.4.1
 - Fix: 1.4 did not open after the update on user devices. R8 over the whole app (T-024) is switched off again (`enable = false` in app/build.gradle.kts, the rollback from ADR 0005); versionCode 6. Cause not confirmed by a crash log (unverified). Install 1.4.1 over 1.4; data is kept (same signature)
