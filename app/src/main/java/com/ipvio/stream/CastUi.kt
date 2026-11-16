@@ -75,7 +75,7 @@ fun CastRow(
         Text("Besetzung", color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold)
         LazyRow(
             Modifier.offset(x = -RowEdge), state = state,
-            contentPadding = PaddingValues(horizontal = RowEdge, vertical = 16.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)
+            contentPadding = PaddingValues(horizontal = RowEdge, vertical = 22.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(cast.distinctBy { it.id }, key = { it.id }) { p ->
                 PersonCard(p, { onPerson(p) }, if (restoreReq != null && p.id == restoreId) Modifier.focusRequester(restoreReq) else Modifier)
@@ -94,7 +94,7 @@ fun SimilarRow(
         Text(title, color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold)
         LazyRow(
             Modifier.offset(x = -RowEdge), state = state,
-            contentPadding = PaddingValues(horizontal = RowEdge, vertical = 16.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)
+            contentPadding = PaddingValues(horizontal = RowEdge, vertical = 22.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(list.distinctBy { it.id }, key = { it.id }) { i ->
                 PosterCard(i, { onOpen(i) }, Modifier.width(150.dp).then(if (restoreReq != null && i.id == restoreId) Modifier.focusRequester(restoreReq) else Modifier))
@@ -161,7 +161,7 @@ fun PersonScreen(ref: PersonRef, all: List<Item>, onOpen: (Item) -> Unit, onBack
                     // Side padding: the enlarged first cover is no longer clipped on the left
                     if (owned.isNotEmpty()) LazyRow(
                         Modifier.offset(x = (-14).dp),
-                        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 18.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)
+                        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 22.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         items(owned.size) { n ->
                             val it = owned[n]

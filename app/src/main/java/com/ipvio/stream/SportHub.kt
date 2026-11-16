@@ -279,28 +279,28 @@ private fun HubOverview(feed: SportFeed.State, hub: HubCtx, onRetry: () -> Unit)
         if (liveMine.isNotEmpty()) item(key = "live") {
             HubSectionTitle("Jetzt live", action = "Alle zeigen") { hub.goTab(1, null) }
             Spacer(Modifier.height(dpx(8)))
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(8))) {
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(14))) {
                 items(liveMine.take(30), key = { it.key }) { g -> MatchCard(g, true) { hub.open(g) } }
             }
         }
         if (upcoming.isNotEmpty()) item(key = "up") {
             HubSectionTitle("Demnächst", action = "Spielplan") { hub.goTab(2, null) }
             Spacer(Modifier.height(dpx(8)))
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(8))) {
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(14))) {
                 items(upcoming.take(30), key = { it.key }) { g -> MatchCard(g, g.key in m.withCh) { hub.open(g) } }
             }
         }
         if (finals.isNotEmpty()) item(key = "fin") {
             HubSectionTitle("Ergebnisse von heute")
             Spacer(Modifier.height(dpx(8)))
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(8))) {
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(14))) {
                 items(finals.take(30), key = { it.key }) { g -> MatchCard(g, false) { hub.open(g) } }
             }
         }
         if (popular.isNotEmpty()) item(key = "leagues") {
             HubSectionTitle("Beliebte Ligen", action = "Alle Ligen") { hub.goTab(3, null) }
             Spacer(Modifier.height(dpx(8)))
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(8))) {
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(14))) {
                 items(popular, key = { it.path }) { l ->
                     LogoTile(l.name, SportData.leagueLogos[l.path], l.name, marked = SportHubFavs.leagues.contains(l.path)) { hub.nav.open(HubPage.League(l)) }
                 }
@@ -310,7 +310,7 @@ private fun HubOverview(feed: SportFeed.State, hub: HubCtx, onRetry: () -> Unit)
             HubSectionTitle("Sportarten")
             Spacer(Modifier.height(dpx(8)))
             val counts = m.counts
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(8))) {
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(14))) {
                 items(SportData.SPORTS, key = { it.key }) { s ->
                     val logo = SportData.LEAGUES.firstOrNull { it.sport == s.key }?.let { SportData.leagueLogos[it.path] }
                     val n = counts[s.key] ?: 0

@@ -399,7 +399,7 @@ internal fun HubLeagues(hub: HubCtx) {
             item(key = "s" + s.key) {
                 HubSectionTitle(Lang.tr(s.label), raw = true)
                 Spacer(Modifier.height(dpx(8)))
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(8))) {
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(14))) {
                     items(ls, key = { it.path }) { l ->
                         LogoTile(l.name, SportData.leagueLogos[l.path], l.name, marked = SportHubFavs.leagues.contains(l.path)) { hub.nav.open(HubPage.League(l)) }
                     }
@@ -429,7 +429,7 @@ internal fun HubTeams(hub: HubCtx) {
         LazyColumn(contentPadding = PaddingValues(horizontal = DS.PageX, vertical = dpx(8)), verticalArrangement = Arrangement.spacedBy(dpx(12))) {
             if (favs.isNotEmpty()) item(key = "fav") {
                 HubSectionTitle("Meine Teams")
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(8))) {
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(14))) {
                     items(favs, key = { it.key }) { f ->
                         LogoTile(f.name, f.logo, f.short, marked = true) {
                             val l = SportData.LEAGUES.firstOrNull { it.path == f.path }
@@ -499,7 +499,7 @@ internal fun HubFavorites(feed: SportFeed.State, hub: HubCtx) {
             }
         }
         item(key = "tiles") {
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(10))) {
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(14))) {
                 when (sub) {
                     "Wettbewerbe" -> items(SportData.LEAGUES.filter { SportHubFavs.leagues.contains(it.path) }, key = { it.path }) { l ->
                         LogoTile(l.name, SportData.leagueLogos[l.path], l.name, marked = true) { hub.nav.open(HubPage.League(l)) }
@@ -826,7 +826,7 @@ internal fun HubNewsRow(leagues: List<SportData.League>) {
     Column {
         HubSectionTitle("Nachrichten")
         Spacer(Modifier.height(dpx(8)))
-        LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(8))) {
+        LazyRow(horizontalArrangement = Arrangement.spacedBy(dpx(14)), contentPadding = PaddingValues(vertical = dpx(14))) {
             items(news, key = { it.league + it.headline }) { a ->
                 HubCardBox(Modifier.width(dpx(320)), onClick = { open = a }) {
                     Box(Modifier.fillMaxWidth().height(dpx(150)).clip(RoundedCornerShape(DS.RadiusS)).background(Tok.CardFocus)) {

@@ -361,14 +361,17 @@ var restoreIdx by remember { mutableIntStateOf(state.focused) }
                     val land = General.cardArt == 1
                     val ncols = if (land) intArrayOf(8, 6, 5)[General.cardSize.coerceIn(0, 2)] else if (General.perRow > 0) General.perRow else intArrayOf(10, 8, 6)[General.cardSize.coerceIn(0, 2)]
                     val gap = if (land) g.gap else g.posterGap
-                    val cardW = (maxWidth - gap * (ncols - 1)) / ncols
+                    // Side padding of the grid (see contentPadding below) is taken off first, so the covers keep fitting the cells
+                    val sidePad = 16.dp
+                    val cardW = (maxWidth - sidePad * 2 - gap * (ncols - 1)) / ncols
                     Box(Modifier.fillMaxSize()) {
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(ncols),
                         state = gridState,
                         horizontalArrangement = Arrangement.spacedBy(gap),
                         verticalArrangement = Arrangement.spacedBy(dpx(18)),
-                        contentPadding = PaddingValues(top = dpx(14), bottom = dpx(60)),
+                        // Room for the enlarged focused cover and its shadow: LazyVerticalGrid clips at its own bounds
+                        contentPadding = PaddingValues(start = sidePad, end = sidePad, top = 28.dp, bottom = dpx(60)),
                         modifier = Modifier.fillMaxSize()
                     ) {
                         itemsIndexed(list, contentType = { _, x -> if (x.kind == Kind.LIVE) 0 else if (land) 1 else 2 }) { idx, item ->

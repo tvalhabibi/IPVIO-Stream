@@ -278,13 +278,13 @@ private fun ListMode(
             // Grid: 2 rows with large covers (default 5 columns = 10 titles), columns adjustable in the "View" button
             val cols = if (General.perRow > 0) General.perRow.coerceIn(3, 7) else 5
             val gap = 14.dp
-            val byWidth = (maxWidth - gap * (cols - 1)) / cols
+            val byWidth = (maxWidth - 32.dp - gap * (cols - 1)) / cols
             val posterW = minOf(byWidth, ((maxHeight - gap - 48.dp) / 2f) / 1.5f)
             if (cur != null) Box(Modifier.fillMaxSize()) {
                 androidx.compose.foundation.lazy.grid.LazyVerticalGrid(
                     columns = androidx.compose.foundation.lazy.grid.GridCells.Fixed(cols),
                     state = previewState,
-                    contentPadding = PaddingValues(vertical = 24.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 28.dp),
                     horizontalArrangement = Arrangement.spacedBy(gap),
                     verticalArrangement = Arrangement.spacedBy(gap),
                     modifier = Modifier.fillMaxSize()
@@ -345,7 +345,8 @@ private fun TileMode(entries: List<Pair<String, List<Item>>>, sort: Int, firstFo
         columns = GridCells.Fixed(3),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(vertical = 8.dp, horizontal = 4.dp),
+        // Room for the 4 % enlargement and the shadow of the highlighted tile (it was 4 dp at the sides, 8 dp above and below)
+        contentPadding = PaddingValues(vertical = 16.dp, horizontal = 12.dp),
         modifier = Modifier.fillMaxSize()
     ) {
         itemsIndexed(entries) { i, e ->

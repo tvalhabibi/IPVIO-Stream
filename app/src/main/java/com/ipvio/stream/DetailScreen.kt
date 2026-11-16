@@ -628,7 +628,8 @@ private fun DetailScreenFull(
                         Modifier.width(dpx(250)).fillMaxHeight(),
                         state = seasonRowState,
                         verticalArrangement = Arrangement.spacedBy(dpx(6)),
-                        contentPadding = PaddingValues(vertical = dpx(8))
+                        // Side room for the enlarged focused season button (lists clip at their bounds)
+                        contentPadding = PaddingValues(horizontal = dpx(10), vertical = dpx(12))
                     ) {
                         items(seasons, key = { it }) { sn ->
                             val cnt = remember(item.id, sn) { item.episodes.count { it.season == sn } }
@@ -685,7 +686,9 @@ private fun DetailScreenFull(
                             DetailPill("Springen", light = true) { doJump() }
                             DetailPill("Abbrechen") { jumpOpen = false; jumpText = "" }
                         }
-                        LazyColumn(Modifier.fillMaxWidth().weight(1f), state = epListState, contentPadding = PaddingValues(bottom = dpx(40))) {
+                        LazyColumn(Modifier.fillMaxWidth().weight(1f), state = epListState,
+                            // Side and top room for the enlarged focused episode and its shadow (lists clip at their bounds)
+                            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 12.dp, bottom = dpx(40))) {
                             itemsIndexed(shown, key = { j0, ep -> "e${ep.season}_${ep.num}_$j0" }) { j, ep ->
                                 val i = (group?.from ?: 0) + j
                                 val em = metaOf(ep)
@@ -741,7 +744,7 @@ private fun EpisodeRow(ep: Episode, em: EpMeta?, v: Variant, prog: ResumeLogic.E
     val sc by androidx.compose.animation.core.animateFloatAsState(if (f) focusScale(1.02f) else 1f, label = "ep")
     Row(
         modifier.fillMaxWidth().padding(vertical = dpx(6))
-            .graphicsLayer { scaleX = sc; scaleY = sc; transformOrigin = androidx.compose.ui.graphics.TransformOrigin(0f, 0.5f) }
+            .graphicsLayer { scaleX = sc; scaleY = sc }
             .then(if (f) Modifier.shadow(dpx(24), shape, ambientColor = Tok.Lift, spotColor = Tok.Lift) else Modifier)
             .clip(shape).background(if (f) Color(0x1FFFFFFF) else Color(0x08FFFFFF))
             .border(1.dp, if (f) Color(0x33FFFFFF) else Color.Transparent, shape)
